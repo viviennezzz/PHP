@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Customers Form</title>
+</head>
+<body>
+<form>
+    <p>
+        <label for="LastName">Last Name:</label>
+        <input type="text" name="LastName" id="LastName">
+    </p>
+    <p>
+        <label for="FirstName">First Name:</label>
+        <input type="text" name="FirstName" id="FirstName">
+    </p>
+    <p>
+        <label for="Phone">Phone:</label>
+        <input type="text" name="Phone" id="Phone">
+    </p>
+    <input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+<p id="submitted"></p>
+<script>
+function addtoDB() {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("submitted").innerHTML = "form submitted";
+    }
+  };
+  var LastName = document.getElementById('LastName').value;
+   var FirstName = document.getElementById('FirstName').value;
+   var Phone = document.getElementById('Phone').value;
+   var queryString = "?LastName=" + LastName + "&FirstName=" + FirstName + "&Phone=" + Phone;
+   console.log(queryString);
+   xhttp.open("GET", "insert.php" + queryString, true);
+   xhttp.send(null); 
+}
+</script>
+</body>
+</html>
